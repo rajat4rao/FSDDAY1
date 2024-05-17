@@ -1,0 +1,28 @@
+Title: Diving Into JavaScript's Object Internals
+
+- Hash Tables and Property Descriptors
+
+Object implementation in javascript at the basic level is achieved through a hash table. This hash table maps keys(property names) to values(property values). When you define an object literal like const obj = { property1: 'value1', property2: 'value2' }, the engine creates a hash table with the specified key-value pairs.
+Furthermore each property in an object is associated with a property descriptor, which says whether the property is writable, enumerable, or configurable.
+
+Property descriptors metadata of each property, describing its behavior and characteristics. These descriptors define various attributes, such as:
+
+1.Value: The actual value of the property.
+2.Writable: Whether the property can be reassigned or not.
+3.Enumerable: Whether the property will be included in for...in loops and Object.keys().
+4.Configurable: Whether the descriptor itself can be modified or deleted.
+
+- Accessing and Modifying Property Descriptors
+
+Object.getOwnPropertyDescriptor() retrieves the descriptor for a specific property, while Object.defineProperty() creates or modifies a property descriptor. For example,
+
+const obj = { property: 'value' };
+const descriptor = Object.getOwnPropertyDescriptor(obj, 'property');
+console.log(descriptor);
+
+// Output: 
+{ value: 'value', writable: true, enumerable: true, configurable: true }
+
+Object.defineProperty(obj, 'prop', { writable: false });
+obj.prop = 'new value'; // This will fail since writable is set to false
+

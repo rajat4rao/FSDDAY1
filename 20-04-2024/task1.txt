@@ -1,0 +1,52 @@
+Hypertext Transfer Protocol (HTTP) was invented in 1989 by Tim Berners-Lee. It is the backbone of the World Wide Web and enables communication between web browsers and servers. HTTP/1.1 was the standard for more than 15 years, but had it's limitation which gave birth to HTTP/2 in 2015. Let's see the key main differences between HTTP/1.1 and HTTP/2
+
+TCP Connection:
+
+HTTP/1.1: Creates and establishes a new TCP connection for each HTTP request/response pair. This caused multiple TCP connections to be created for a resource intensive website which caused latency issues.
+HTTP/2: Creates a single TCP connection for multiple requests and responses. This method enables uses network resources efficiently and reduces latency. This multiplexing capability allows for concurrent processing of multiple requests and responses over the same connection, resulting in faster load times.
+
+
+Multiplexing and Head-of-Line Blocking:
+
+HTTP/1.1: Requests are handled in the order they are received. If one request took a lot to time to complete, it resulted in head-of-line blocking issue, where further requests are blocked until the slow request under process is completed.
+HTTP/2: Supports multiplexing, allowing multiple requests and responses to be interleaved and processed concurrently over the same TCP connection. This avoids the head-of-line blocking scenario by enabling efficient resource prioritization and delivery.
+
+
+Header Compression:
+
+HTTP/1.1: Headers are sent in plain text format, thus causing a increase in overhead and bandwidth usage. This was especially prominent in HTTPS connections where headers are often large due to additional security-related fields.
+HTTP/2: Uses HPACK compression to reduce the overhead of HTTP headers, which results in efficient data transfer and better performance, specially for HTTPS connections.
+
+
+Server Push:
+
+HTTP/1.1: The client will have to request each resource individually. This was even in a case where a server knows those resources are required to render the page completely. This led to multiple round trips and increased latency.
+HTTP/2: Allows servers to "push" additional resources proactively to the client, reducing the number of requests and improving loading times. 
+
+
+Binary Framing:
+
+HTTP/1.1: Uses a textual format for headers and data payloads. This caused inefficient processing and possible compatibility issues due to different interpretations of whitespace and line endings.
+HTTP/2: Headers and data payloads were encoded in binary format. This resulted in efficient processing, overhead reduction and compatibility issues were overcome.
+
+Prioritization:
+
+HTTP/1.1: All requests were treated with equal priority which sometimes resulted in inefficient resource loading and performance
+HTTP/2: Supports request prioritization. This allows clients to assign relative importance of different resources. For example HTML, CSS, and JavaScript files can be prioritized over images and fonts resulting in faster page loading.
+
+
+Flow Control:
+
+HTTP/1.1: Relies primarily on TCP flow control to manage allocation of resources and prevention of buffer overflows. 
+HTTP/2: Flow control mechanisms are implemented at the application layer, allowing both the client and server to control the flow of data more effectively, preventing buffer overflows and ensuring optimal resource utilization.
+
+
+Error Handling:
+
+HTTP/1.1: Limited error handling capability. Errors can potentially cause the entire connection to be terminated, which will require a new connection to be established for handling requests.
+HTTP/2: Robust error handling capability. Error handling can be done for individual streams (requests/responses) to be reset or canceled without affecting the overall connection.
+
+
+HTTP/2 is considerably better for resource-intensive websites and applications. It will not show huge improvement in static websites. HTTP/2 is backward-compatible with HTTP/1.1, ensuring a smooth transition for both clients and servers.
+
+
